@@ -604,18 +604,11 @@ export default function DigitalEventCalendar() {
       {/* FOOTER */}
       <footer className={`mt-6 pt-6 border-t ${isDark ? 'border-gray-700 text-gray-400' : 'border-gray-200 text-gray-600'}`}>
         <div className="max-w-5xl mx-auto px-2 sm:px-4">
-          <div className="flex flex-wrap gap-4 mb-4 justify-center">
-            <a href="https://www.facebook.com/AcademiciansOfficial/reviews" target="_blank" rel="noopener noreferrer" className="text-xs text-green-600 hover:text-green-700 underline">
-              📘 School Facebook
-            </a>
-            <a href="https://www.facebook.com/kent.dayo.5" target="_blank" rel="noopener noreferrer" className="text-xs text-green-600 hover:text-green-700 underline">
-              👤 Admin Contact
-            </a>
-          </div>
-          <div className={`pt-4 border-t ${isDark ? 'border-gray-700' : 'border-gray-200'} text-center text-xs`}>
+          <div className={`pt-4 text-center text-xs`}>
             <p className="mb-2">#TheSchoolOfChoice</p>
             <p className={isDark ? 'text-gray-500' : 'text-gray-400'}>For event inquiries, contact the school directly via Facebook</p>
-            <p className={`mt-2 ${isDark ? 'text-gray-600' : 'text-gray-500'}`}>© 2026 Academicians</p>
+            <p className={`mt-2 ${isDark ? 'text-gray-600' : 'text-gray-500'}`}>© 2025-2026 Academicians</p>
+            <p className={`text-[10px] mt-1 ${isDark ? 'text-gray-600' : 'text-gray-500'}`}>app by Group 6 ICT Babbage</p>
           </div>
         </div>
       </footer>
