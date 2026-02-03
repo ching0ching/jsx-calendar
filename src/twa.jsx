@@ -425,24 +425,24 @@ export default function DigitalEventCalendar() {
   return (
     <div className={`min-h-screen p-2 sm:p-4 ${isDark ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-800'}`}>
       {/* HEADER */}
-      <header className={`max-w-5xl mx-auto mb-4 sm:mb-6 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg border ${isDark ? 'border-gray-700' : 'border-gray-200'} flex items-center justify-between gap-4`} style={{ backgroundColor: COLORS.green.dark }}>
-        <div className="flex items-center gap-3 sm:gap-4">
-          <div style={{ width: 52, height: 52, minWidth: 52, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+      <header className={`max-w-5xl mx-auto mb-4 sm:mb-6 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg border ${isDark ? 'border-gray-700' : 'border-gray-200'} flex items-stretch justify-between gap-3`} style={{ backgroundColor: COLORS.green.dark }}>
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+          <div style={{ width: 50, height: 50, minWidth: 50, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
             <img src="/twa-logo.jpg" alt="School Logo" style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', boxShadow: '0 2px 4px rgba(0,0,0,0.3)' }} onError={(e) => { e.target.style.display = 'none'; }} />
           </div>
-          <div>
-            <h1 className="text-xl sm:text-3xl font-bold leading-none" style={{ color: '#f7d774', textShadow: '0 1px 0 rgba(0,0,0,0.15)' }}>Digital Event Calendar</h1>
-            <p className="text-sm sm:text-base leading-tight mt-0.5" style={{ color: '#ffeeba' }}>Tayabas Western Academy</p>
-            <p className="text-xs leading-tight" style={{ color: '#ffeeba', fontStyle: 'italic', letterSpacing: '0.5px' }}>LAUS DEO</p>
+          <div className="min-w-0 overflow-hidden">
+            <h1 className="text-lg sm:text-2xl font-bold leading-snug" style={{ color: '#f7d774', textShadow: '0 1px 0 rgba(0,0,0,0.15)' }}>Digital Event Calendar</h1>
+            <p className="text-xs sm:text-sm leading-tight" style={{ color: '#ffeeba' }}>Tayabas Western Academy</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-3 ml-auto flex-shrink-0">
-          <button className={`px-3 sm:px-4 py-2 rounded min-h-[40px] sm:min-h-[44px] flex items-center justify-center whitespace-nowrap ${isDark ? 'bg-gray-100 text-gray-900' : 'bg-yellow-300 text-gray-900'} text-xs sm:text-sm shadow-sm font-semibold`} onClick={() => setIsDark(!isDark)}>{isDark ? '☀️' : '🌙'} <span className="hidden sm:inline ml-1">{isDark ? 'Light' : 'Dark'}</span></button>
+        <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+          <button className={`px-2.5 sm:px-4 py-2 rounded min-h-[40px] sm:min-h-[44px] flex items-center justify-center whitespace-nowrap ${isDark ? 'bg-gray-100 text-gray-900' : 'bg-yellow-300 text-gray-900'} text-xs sm:text-sm shadow-sm font-semibold`} onClick={() => setIsDark(!isDark)}>{isDark ? '☀️' : '🌙'} <span className="hidden sm:inline ml-1">{isDark ? 'Light' : 'Dark'}</span></button>
 
-          <button className={`px-3 sm:px-4 py-2 rounded min-h-[40px] sm:min-h-[44px] flex items-center justify-center whitespace-nowrap ${isDark ? 'bg-gray-800 text-white' : 'bg-green-600 text-white'} text-xs sm:text-sm shadow-sm`} onClick={() => { if (isAdmin) setShowAdminModal(true); else setShowLoginModal(true); }}>{isAdmin ? '⚙️' : '🔐'} <span className="hidden sm:inline ml-1">{isAdmin ? 'Admin' : 'Login'}</span></button>
+          <button className={`px-2.5 sm:px-4 py-2 rounded min-h-[40px] sm:min-h-[44px] flex items-center justify-center whitespace-nowrap ${isDark ? 'bg-gray-800 text-white' : 'bg-green-600 text-white'} text-xs sm:text-sm shadow-sm`} onClick={() => { if (isAdmin) setShowAdminModal(true); else setShowLoginModal(true); }}>{isAdmin ? '⚙️' : '🔐'} <span className="hidden sm:inline ml-1">{isAdmin ? 'Admin' : 'Login'}</span></button>
 
-          {isAdmin && <button className="px-3 sm:px-4 py-2 rounded border text-xs sm:text-sm text-red-500 min-h-[40px] sm:min-h-[44px] flex items-center justify-center whitespace-nowrap" onClick={() => setIsAdmin(false)}>✕ <span className="hidden sm:inline ml-1">Logout</span></button>}
+          {isAdmin && <button className="px-2.5 sm:px-4 py-2 rounded border text-xs sm:text-sm text-red-500 min-h-[40px] sm:min-h-[44px] flex items-center justify-center whitespace-nowrap" onClick={() => setIsAdmin(false)}>✕ <span className="hidden sm:inline ml-1">Logout</span></button>}
+
 
           <button className="px-3 sm:px-4 py-2 rounded border text-lg sm:text-sm lg:hidden min-h-[40px] sm:min-h-[44px] flex items-center justify-center flex-shrink-0" onClick={() => setShowSidebar(s => !s)}>☰</button>
         </div>
@@ -522,7 +522,7 @@ export default function DigitalEventCalendar() {
         {showSidebar && <div className="fixed inset-0 bg-black/50 z-30 lg:hidden" onClick={() => setShowSidebar(false)}></div>}
 
         {/* sidebar - mobile drawer + desktop column */}
-        <aside className={`${showSidebar ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'} lg:translate-x-0 lg:col-span-1 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg border ${isDark ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-200'} lg:static fixed lg:relative top-0 right-0 bottom-0 w-80 lg:w-auto z-40 overflow-y-auto transition-transform duration-300 ease-in-out`}>
+        <aside className={`fixed lg:static lg:col-span-1 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg border ${isDark ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-200'} ${showSidebar ? 'right-0' : '-right-80 lg:right-auto'} top-0 bottom-0 w-80 lg:w-auto z-40 lg:z-auto overflow-y-auto transition-all duration-300 ease-in-out`}>
           <button className="sticky top-0 w-full mb-4 px-3 py-2 bg-red-600 text-white rounded min-h-[44px] lg:hidden" onClick={() => setShowSidebar(false)}>✕ Close Menu</button>
 
           <div className="mb-4">
