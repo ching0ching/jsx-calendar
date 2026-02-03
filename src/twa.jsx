@@ -418,65 +418,65 @@ export default function DigitalEventCalendar() {
     return opts;
   }
 
-  // small animated card style for cells - taller on mobile for better touch targets
-  const cellBaseClass = 'min-h-[90px] sm:min-h-[80px] md:min-h-[100px] p-2 sm:p-3 rounded-xl cursor-pointer transition-transform duration-150 ease-in-out flex flex-col justify-between border';
+  // small animated card style for cells - responsive heights based on screen size
+  const cellBaseClass = 'min-h-[70px] sm:min-h-[90px] md:min-h-[100px] p-1.5 sm:p-3 rounded-lg cursor-pointer transition-transform duration-150 ease-in-out flex flex-col justify-between border';
 
   // ---------------- RENDER ----------------
   return (
-    <div className={`min-h-screen p-4 ${isDark ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-800'}`}>
+    <div className={`min-h-screen p-2 sm:p-4 ${isDark ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-800'}`}>
       {/* HEADER */}
-      <header className={`max-w-4xl mx-auto mb-6 p-3 sm:p-4 rounded-xl shadow-xl border ${isDark ? 'border-gray-700' : 'border-gray-200'} flex items-center justify-between flex-wrap`} style={{ backgroundColor: COLORS.green.dark }}>
-        <div className="flex items-center gap-3 sm:gap-4 flex-1">
-          <div style={{ width: 56, height: 56, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+      <header className={`max-w-5xl mx-auto mb-4 sm:mb-6 p-2 sm:p-4 rounded-lg sm:rounded-xl shadow-lg border ${isDark ? 'border-gray-700' : 'border-gray-200'} flex items-center justify-between flex-wrap`} style={{ backgroundColor: COLORS.green.dark }}>
+        <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
+          <div style={{ width: 48, height: 48, minWidth: 48, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
             <img src="/twa-logo.jpg" alt="School Logo" style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', boxShadow: '0 2px 4px rgba(0,0,0,0.3)' }} onError={(e) => { e.target.style.display = 'none'; }} />
           </div>
           <div className="min-w-0">
-            <h1 className="text-lg sm:text-2xl font-bold" style={{ color: '#f7d774', textShadow: '0 1px 0 rgba(0,0,0,0.15)' }}>Digital Event Calendar</h1>
-            <p className="text-xs sm:text-sm" style={{ color: '#ffeeba' }}>Tayabas Western Academy</p>
-            <p className="text-xs" style={{ color: '#ffeeba', fontStyle: 'italic', letterSpacing: '1px' }}>LAUS DEO</p>
+            <h1 className="text-base sm:text-2xl font-bold leading-tight" style={{ color: '#f7d774', textShadow: '0 1px 0 rgba(0,0,0,0.15)' }}>Digital Event Calendar</h1>
+            <p className="text-xs sm:text-sm leading-tight" style={{ color: '#ffeeba' }}>Tayabas Western Academy</p>
+            <p className="text-xs leading-tight" style={{ color: '#ffeeba', fontStyle: 'italic', letterSpacing: '0.5px' }}>LAUS DEO</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-1 sm:gap-2 mt-3 sm:mt-0 w-full sm:w-auto flex-wrap justify-end">
-          <button className={`px-3 sm:px-4 py-2 sm:py-2 rounded min-h-[44px] flex items-center justify-center ${isDark ? 'bg-gray-100 text-gray-900' : 'bg-yellow-300 text-gray-900'} text-xs sm:text-sm shadow-sm font-semibold`} onClick={() => setIsDark(!isDark)}>{isDark ? '☀️ Light' : '🌙 Dark'}</button>
+        <div className="flex items-center gap-1 sm:gap-2 mt-2 sm:mt-0 w-full sm:w-auto flex-wrap justify-end">
+          <button className={`px-2 sm:px-4 py-2 rounded min-h-[40px] sm:min-h-[44px] flex items-center justify-center ${isDark ? 'bg-gray-100 text-gray-900' : 'bg-yellow-300 text-gray-900'} text-xs sm:text-sm shadow-sm font-semibold`} onClick={() => setIsDark(!isDark)}>{isDark ? '☀️' : '🌙'} <span className="hidden sm:inline ml-1">{isDark ? 'Light' : 'Dark'}</span></button>
 
-          <button className={`px-3 sm:px-4 py-2 sm:py-2 rounded min-h-[44px] flex items-center justify-center ${isDark ? 'bg-gray-800 text-white' : 'bg-green-600 text-white'} text-xs sm:text-sm shadow-sm`} onClick={() => { if (isAdmin) setShowAdminModal(true); else setShowLoginModal(true); }}>{isAdmin ? 'Admin' : 'Admin Login'}</button>
+          <button className={`px-2 sm:px-4 py-2 rounded min-h-[40px] sm:min-h-[44px] flex items-center justify-center ${isDark ? 'bg-gray-800 text-white' : 'bg-green-600 text-white'} text-xs sm:text-sm shadow-sm`} onClick={() => { if (isAdmin) setShowAdminModal(true); else setShowLoginModal(true); }}>{isAdmin ? '⚙️' : '🔐'} <span className="hidden sm:inline ml-1">{isAdmin ? 'Admin' : 'Login'}</span></button>
 
-          {isAdmin && <button className="px-3 sm:px-4 py-2 sm:py-2 rounded border text-xs sm:text-sm text-red-500 min-h-[44px] flex items-center justify-center" onClick={() => setIsAdmin(false)}>Logout</button>}
+          {isAdmin && <button className="px-2 sm:px-4 py-2 rounded border text-xs sm:text-sm text-red-500 min-h-[40px] sm:min-h-[44px] flex items-center justify-center" onClick={() => setIsAdmin(false)}>✕ <span className="hidden sm:inline ml-1">Logout</span></button>}
 
-          <button className="px-3 sm:px-4 py-2 sm:py-2 rounded border text-xs sm:text-sm md:hidden min-h-[44px] flex items-center justify-center" onClick={() => setShowSidebar(s => !s)}>☰</button>
+          <button className="px-2 sm:px-4 py-2 rounded border text-lg sm:text-sm lg:hidden min-h-[40px] sm:min-h-[44px] flex items-center justify-center" onClick={() => setShowSidebar(s => !s)}>☰</button>
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+      <main className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
 
         {/* Calendar column */}
-        <section className={`sm:col-span-2 p-4 rounded-lg shadow-sm ${isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
+        <section className={`lg:col-span-2 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-sm ${isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}`}>
 
           {/* month nav */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-2 mb-3">
-            <div className="flex items-center gap-2 order-1">
-              <button onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1))} className="px-3 sm:px-4 py-2 rounded border min-h-[44px] flex items-center justify-center text-lg">◀</button>
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 mb-3">
+            <div className="flex items-center gap-1 sm:gap-2 order-1">
+              <button onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1))} className="px-2 sm:px-4 py-2 rounded border min-h-[40px] sm:min-h-[44px] flex items-center justify-center text-lg flex-shrink-0">◀</button>
 
-              <select value={`${currentMonth.getFullYear()}-${String(currentMonth.getMonth()+1).padStart(2,'0')}`} onChange={(e) => { const [y,m] = e.target.value.split('-'); setCurrentMonth(new Date(Number(y), Number(m)-1, 1)); }} className={`px-3 sm:px-4 py-2 border rounded flex-1 min-h-[44px] text-sm ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-800 border-gray-300'}`}>
+              <select value={`${currentMonth.getFullYear()}-${String(currentMonth.getMonth()+1).padStart(2,'0')}`} onChange={(e) => { const [y,m] = e.target.value.split('-'); setCurrentMonth(new Date(Number(y), Number(m)-1, 1)); }} className={`px-2 sm:px-4 py-2 border rounded flex-1 min-h-[40px] sm:min-h-[44px] text-xs sm:text-sm ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-800 border-gray-300'}`}>
                 {monthSelectOptions().map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
               </select>
 
-              <button onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1))} className="px-3 sm:px-4 py-2 rounded border min-h-[44px] flex items-center justify-center text-lg">▶</button>
+              <button onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1))} className="px-2 sm:px-4 py-2 rounded border min-h-[40px] sm:min-h-[44px] flex items-center justify-center text-lg flex-shrink-0">▶</button>
             </div>
 
-            <div className="text-xs sm:text-sm text-gray-500 text-center sm:text-right order-2 sm:order-2">Timezone: {TIMEZONE}</div>
+            <div className="text-xs text-gray-500 text-center sm:text-right order-2 sm:order-2">Timezone: {TIMEZONE}</div>
           </div>
 
           {/* weekday header */}
-          <div className="grid grid-cols-7 gap-1 text-xs sm:text-sm">
+          <div className="grid grid-cols-7 gap-0.5 sm:gap-1 text-xs sm:text-sm">
             {['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d => (
-              <div key={d} className="text-center font-semibold py-3 sm:py-2 rounded-t shadow-md text-xs sm:text-sm" style={{ backgroundColor: COLORS.green.dark, color: '#f7d774' }}>{d}</div>
+              <div key={d} className="text-center font-semibold py-2 sm:py-3 rounded-t shadow-sm text-xs sm:text-sm" style={{ backgroundColor: COLORS.green.dark, color: '#f7d774' }}>{d}</div>
             ))}
           </div>
 
           {/* days */}
-          <div className="grid grid-cols-7 gap-2 text-xs md:text-sm mt-2">
+          <div className="grid grid-cols-7 gap-0.5 sm:gap-1 text-xs md:text-sm mt-1 sm:mt-2">
             {weeks.map((week, wi) => (
               <React.Fragment key={wi}>
                 {week.map((day, di) => {
@@ -494,21 +494,21 @@ export default function DigitalEventCalendar() {
                       className={`${cellBaseClass} ${day ? 'shadow-lg hover:scale-[1.02]' : ''}`}
                       style={{ backgroundColor: bg, color: txt }}
                     >
-                      <div className="flex justify-between items-start">
-                        <div style={{ width: 36, height: 36, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, backgroundColor: isToday ? COLORS.green.dark : 'transparent', color: isToday ? '#fff' : numColor, fontSize: '14px' }}>{day ? day.getDate() : ''}</div>
+                      <div className="flex justify-between items-start gap-1">
+                        <div style={{ width: 32, height: 32, minWidth: 32, borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, backgroundColor: isToday ? COLORS.green.dark : 'transparent', color: isToday ? '#fff' : numColor, fontSize: '13px' }}>{day ? day.getDate() : ''}</div>
 
-                        {dayEvents.length > 1 && <div className="text-[10px] px-1.5 rounded-full" style={{ backgroundColor: 'rgba(0,0,0,0.28)', color: '#fff' }}>+{dayEvents.length - 1}</div>}
+                        {dayEvents.length > 1 && <div className="text-[8px] sm:text-[10px] px-1 rounded-full" style={{ backgroundColor: 'rgba(0,0,0,0.28)', color: '#fff', minWidth: '20px', textAlign: 'center' }}>+{dayEvents.length - 1}</div>}
                       </div>
 
                       <div className="mt-1">
-                        {dayEvents.slice(0,2).map(ev => (
-                          <div key={ev.id} className="flex items-center gap-1 text-xs sm:text-xs font-medium truncate px-1.5 py-1 rounded" style={{ backgroundColor: TYPE_META[ev.type].color.bg, color: TYPE_META[ev.type].color.text, transition: 'background .2s' }}>
-                            <div style={{ width: 16, flexShrink: 0 }}>{TYPE_META[ev.type].icon}</div>
-                            <div className="truncate text-xs">{ev.title}</div>
+                        {dayEvents.slice(0,1).map(ev => (
+                          <div key={ev.id} className="flex items-center gap-0.5 text-[10px] sm:text-xs font-medium truncate px-1 py-0.5 rounded" style={{ backgroundColor: TYPE_META[ev.type].color.bg, color: TYPE_META[ev.type].color.text, transition: 'background .2s' }}>
+                            <div style={{ width: 14, flexShrink: 0, fontSize: '10px' }}>{TYPE_META[ev.type].icon}</div>
+                            <div className="truncate text-[9px] sm:text-xs">{ev.title}</div>
                           </div>
                         ))}
 
-                        {(!dayEvents || dayEvents.length === 0) && <div className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-400'}`}> </div>}
+                        {(!dayEvents || dayEvents.length === 0) && <div className={`text-[8px] ${isDark ? 'text-gray-600' : 'text-gray-300'}`}></div>}
                       </div>
                     </div>
                   );
@@ -518,10 +518,9 @@ export default function DigitalEventCalendar() {
           </div>
         </section>
 
-        {/* sidebar */}
-        <aside className={`p-4 rounded-lg shadow-lg border ${isDark ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-200'} hidden sm:block`}>
-          {showSidebar && <button className="fixed top-4 right-4 px-4 py-3 bg-red-600 text-white rounded min-h-[44px] z-60 md:hidden" onClick={() => setShowSidebar(false)}>✕ Close</button>}
-          {showSidebar && <div className="h-12 md:hidden"></div>}
+        {/* sidebar - mobile drawer + desktop column */}
+        <aside className={`${showSidebar ? 'block' : 'hidden'} lg:block lg:col-span-1 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg border ${isDark ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-200'} lg:static fixed lg:relative inset-0 lg:inset-auto z-40 overflow-y-auto`}>
+          {showSidebar && <button className="sticky top-0 w-full mb-4 px-3 py-2 bg-red-600 text-white rounded min-h-[44px] lg:hidden" onClick={() => setShowSidebar(false)}>✕ Close Menu</button>}
 
           <div className="mb-4">
             <h3 className="font-semibold text-green-700">Quick Info</h3>
