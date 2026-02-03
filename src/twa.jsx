@@ -518,9 +518,12 @@ export default function DigitalEventCalendar() {
           </div>
         </section>
 
+        {/* Mobile overlay backdrop */}
+        {showSidebar && <div className="fixed inset-0 bg-black/50 z-30 lg:hidden" onClick={() => setShowSidebar(false)}></div>}
+
         {/* sidebar - mobile drawer + desktop column */}
-        <aside className={`${showSidebar ? 'block' : 'hidden'} lg:block lg:col-span-1 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg border ${isDark ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-200'} lg:static fixed lg:relative inset-0 lg:inset-auto z-40 overflow-y-auto`}>
-          {showSidebar && <button className="sticky top-0 w-full mb-4 px-3 py-2 bg-red-600 text-white rounded min-h-[44px] lg:hidden" onClick={() => setShowSidebar(false)}>✕ Close Menu</button>}
+        <aside className={`${showSidebar ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'} lg:translate-x-0 lg:col-span-1 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg border ${isDark ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-200'} lg:static fixed lg:relative top-0 right-0 bottom-0 w-80 lg:w-auto z-40 overflow-y-auto transition-transform duration-300 ease-in-out`}>
+          <button className="sticky top-0 w-full mb-4 px-3 py-2 bg-red-600 text-white rounded min-h-[44px] lg:hidden" onClick={() => setShowSidebar(false)}>✕ Close Menu</button>
 
           <div className="mb-4">
             <h3 className="font-semibold text-green-700">Quick Info</h3>
