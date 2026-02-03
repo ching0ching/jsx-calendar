@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSX Calendar</title>
+  
+  <style>
+    html, body { margin: 0; padding: 0; background-color: #ffffff; }
+  </style>
+
+  <script>
+    (function(){
+      try{
+        var dark = localStorage.getItem('dec_theme_dark');
+        if(dark === 'true'){
+          document.documentElement.style.backgroundColor = '#0f1720';
+          if(document.body) document.body.style.backgroundColor = '#0f1720';
+        }
+      }catch(e){}
+    })();
+  </script>
+  
+  <link rel="stylesheet" href="output.css">
+</head>
+<body>
+  <div id="root"></div>
+  <script src="../src/main.jsx" type="module"></script>
+</body>
+</html>
