@@ -497,7 +497,7 @@ export default function DigitalEventCalendar() {
                       <div className="flex justify-between items-start gap-1">
                         <div style={{ width: 32, height: 32, minWidth: 32, borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, backgroundColor: isToday ? COLORS.green.dark : 'transparent', color: isToday ? '#fff' : numColor, fontSize: '13px' }}>{day ? day.getDate() : ''}</div>
 
-                        {dayEvents.length > 1 && <div className="font-bold rounded-full shadow-md flex items-center justify-center" style={{ backgroundColor: COLORS.green.dark, color: '#fff', minWidth: '24px', width: '24px', height: '24px', fontSize: '14px', border: '2px solid #fff', boxShadow: '0 2px 8px rgba(0,0,0,0.3)' }}>+{dayEvents.length - 1}</div>}
+                        {dayEvents.length > 1 && <div className="font-bold rounded-full shadow-md flex items-center justify-center relative" style={{ backgroundColor: COLORS.green.dark, color: '#fff', minWidth: '20px', width: '20px', height: '20px', fontSize: '12px', border: '2px solid #fff', boxShadow: '0 2px 8px rgba(0,0,0,0.3)', marginRight: '-10px', zIndex: 10 }}>+{dayEvents.length - 1}</div>}
                       </div>
 
                       <div className="mt-1">
