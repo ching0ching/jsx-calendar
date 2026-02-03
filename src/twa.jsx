@@ -2,6 +2,7 @@
 // Improvements: polished green/gold theme, animations, stronger shadows, mobile-friendly keyboard handling, admin tools, import/export, offline-ready notes.
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { isFirebaseEnabled, subscribeToEvents, addEventToDb, deleteEventFromDb } from './firebase';
 
 // ---------- CONFIG ----------
 const ADMIN_PASSWORD = 'ros123';
@@ -192,6 +193,16 @@ export default function DigitalEventCalendar() {
     return normalized;
   });
 
+  // If Firebase is configured, subscribe to remote events and keep localStorage in sync
+  useEffect(() => {
+    if (!isFirebaseEnabled()) return;
+    const unsub = subscribeToEvents((data) => {
+      setEvents(data);
+      try { localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data)); } catch (e) {}
+    });
+    return () => { try { unsub && unsub(); } catch (e) {} };
+  }, []);
+
   // UI state
   const [isAdmin, setIsAdmin] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -310,12 +321,32 @@ export default function DigitalEventCalendar() {
 
   // CRUD helpers
   function addEvent(ev) {
-    const newEv = { ...ev, id: uid('evt') };
-    setEvents((s) => {
-      const next = [...s, newEv];
-      try { localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(next)); } catch (e) {}
-      return next;
-    });
+    const tempId = uid('evt');
+    const newEv = { ...ev, id: tempId };
+
+    if (isFirebaseEnabled()) {
+      // optimistic UI update; Firestore will emit the canonical list via subscription
+      setEvents((s) => {
+        const next = [...s, newEv];
+        try { localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(next)); } catch (e) {}
+        return next;
+      });
+
+      // send to cloud (omit id so Firestore generates its own)
+      addEventToDb(newEv).then(({ id: realId }) => {
+        // replace temp id with real id when available
+        setEvents((s) => s.map(x => x.id === tempId ? { ...x, id: realId } : x));
+        try { localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(events)); } catch (e) {}
+      }).catch(() => showNote('Failed to save to cloud', 'error'));
+
+    } else {
+      setEvents((s) => {
+        const next = [...s, newEv];
+        try { localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(next)); } catch (e) {}
+        return next;
+      });
+    }
+
     // ensure UI refreshes
     setSelectedEvent(null);
     setSelectedDate(null);
@@ -339,9 +370,6 @@ export default function DigitalEventCalendar() {
     const cleaned = current.map(ev => ({ ...ev, id: String(ev.id) }));
     const filtered = cleaned.filter(ev => String(ev.id) !== String(id));
 
-    console.log('BEFORE DELETE:', cleaned);
-    console.log('AFTER DELETE:', filtered);
-
     try {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(filtered));
     } catch (e) {
@@ -350,6 +378,13 @@ export default function DigitalEventCalendar() {
 
     return filtered;
   });
+
+  // if using Firestore, attempt remote delete (will be reflected by subscription)
+  if (isFirebaseEnabled()) {
+    try {
+      deleteEventFromDb(id).catch(() => {});
+    } catch (e) { /* noop */ }
+  }
 
   setSelectedEvent(null);
   setSelectedDate(null);
