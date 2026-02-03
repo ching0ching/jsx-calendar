@@ -579,22 +579,17 @@ export default function DigitalEventCalendar() {
         {/* UPCOMING EVENTS SECTION */}
         <section className={`max-w-5xl mx-auto p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg border ${isDark ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'}`}>
           <h2 className="text-lg sm:text-xl font-bold mb-3 text-green-700">📅 Upcoming Events</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {events.length === 0 ? (
-              <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>No events yet. Check back soon!</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {events.filter(ev => ev.start && new Date(ev.start) > new Date()).length === 0 ? (
+              <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>No upcoming events. Check back soon!</p>
             ) : (
               events
-                .slice(0, 6)
+                .filter(ev => ev.start && new Date(ev.start) > new Date())
+                .slice(0, 4)
                 .map(ev => (
-                  <div key={ev.id} className="p-3 rounded-lg border" style={{ backgroundColor: TYPE_META[ev.type].color.bg, color: TYPE_META[ev.type].color.text, borderColor: TYPE_META[ev.type].color.text + '40' }}>
-                    <div className="flex items-start gap-2">
-                      <span style={{ fontSize: '20px' }}>{TYPE_META[ev.type].icon}</span>
-                      <div className="flex-1 min-w-0">
-                        <div className="font-semibold text-sm truncate">{ev.title}</div>
-                        <div className="text-xs opacity-75 mt-1">{ev.start || 'No date'}</div>
-                        {ev.location && <div className="text-xs opacity-75">📍 {ev.location}</div>}
-                      </div>
-                    </div>
+                  <div key={ev.id} className="p-2 rounded border text-xs" style={{ backgroundColor: TYPE_META[ev.type].color.bg, color: TYPE_META[ev.type].color.text, borderColor: TYPE_META[ev.type].color.text + '40' }}>
+                    <div className="font-semibold truncate">{ev.title}</div>
+                    <div className="opacity-75 text-[11px]">{ev.start}</div>
                   </div>
                 ))
             )}
