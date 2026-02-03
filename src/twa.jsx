@@ -579,17 +579,21 @@ export default function DigitalEventCalendar() {
         {/* UPCOMING EVENTS SECTION */}
         <section className={`max-w-5xl mx-auto p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg border ${isDark ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'}`}>
           <h2 className="text-lg sm:text-xl font-bold mb-3 text-green-700">📅 Upcoming Events</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-2">
             {events.filter(ev => ev.start && new Date(ev.start) > new Date()).length === 0 ? (
-              <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>No upcoming events. Check back soon!</p>
+              <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'} col-span-2`}>No upcoming events. Check back soon!</p>
             ) : (
               events
                 .filter(ev => ev.start && new Date(ev.start) > new Date())
+                .sort((a, b) => new Date(a.start) - new Date(b.start))
                 .slice(0, 4)
                 .map(ev => (
                   <div key={ev.id} className="p-2 rounded border text-xs" style={{ backgroundColor: TYPE_META[ev.type].color.bg, color: TYPE_META[ev.type].color.text, borderColor: TYPE_META[ev.type].color.text + '40' }}>
-                    <div className="font-semibold truncate">{ev.title}</div>
-                    <div className="opacity-75 text-[11px]">{ev.start}</div>
+                    <div className="font-semibold truncate flex items-center gap-1">
+                      <span>{TYPE_META[ev.type].icon}</span>
+                      <span className="truncate">{ev.title}</span>
+                    </div>
+                    <div className="opacity-75 text-[10px] mt-1">{ev.start}</div>
                   </div>
                 ))
             )}
