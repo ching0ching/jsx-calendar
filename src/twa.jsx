@@ -575,7 +575,60 @@ export default function DigitalEventCalendar() {
             </div>
           </div>
         </aside>
+
+        {/* UPCOMING EVENTS SECTION */}
+        <section className={`max-w-5xl mx-auto p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg border ${isDark ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'}`}>
+          <h2 className="text-lg sm:text-xl font-bold mb-3 text-green-700">📅 Upcoming Events</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {events.length === 0 ? (
+              <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>No events yet. Check back soon!</p>
+            ) : (
+              events
+                .slice(0, 6)
+                .map(ev => (
+                  <div key={ev.id} className="p-3 rounded-lg border" style={{ backgroundColor: TYPE_META[ev.type].color.bg, color: TYPE_META[ev.type].color.text, borderColor: TYPE_META[ev.type].color.text + '40' }}>
+                    <div className="flex items-start gap-2">
+                      <span style={{ fontSize: '20px' }}>{TYPE_META[ev.type].icon}</span>
+                      <div className="flex-1 min-w-0">
+                        <div className="font-semibold text-sm truncate">{ev.title}</div>
+                        <div className="text-xs opacity-75 mt-1">{ev.start || 'No date'}</div>
+                        {ev.location && <div className="text-xs opacity-75">📍 {ev.location}</div>}
+                      </div>
+                    </div>
+                  </div>
+                ))
+            )}
+          </div>
+        </section>
       </main>
+
+      {/* FOOTER */}
+      <footer className={`mt-6 pt-6 border-t ${isDark ? 'border-gray-700 text-gray-400' : 'border-gray-200 text-gray-600'}`}>
+        <div className="max-w-5xl mx-auto px-2 sm:px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <div>
+              <h3 className="font-semibold text-green-700 mb-2">Academicians</h3>
+              <p className="text-sm">Your trusted partner in quality education</p>
+            </div>
+            <div className="sm:text-right">
+              <p className="text-sm font-medium">Connect With Us</p>
+              <div className="flex flex-col sm:flex-col-reverse gap-2 mt-2">
+                <a href="https://www.facebook.com/AcademiciansOfficial/reviews" target="_blank" rel="noopener noreferrer" className="text-xs text-green-600 hover:text-green-700 underline">
+                  📘 School Facebook
+                </a>
+                <a href="https://www.facebook.com/kent.dayo.5" target="_blank" rel="noopener noreferrer" className="text-xs text-green-600 hover:text-green-700 underline">
+                  👤 Admin Contact
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className={`pt-4 border-t ${isDark ? 'border-gray-700' : 'border-gray-200'} text-center text-xs`}>
+            <p className="mb-2">#TheSchoolOfChoice</p>
+            <p className={isDark ? 'text-gray-500' : 'text-gray-400'}>For event inquiries, contact the school directly via Facebook</p>
+            <p className={`mt-2 ${isDark ? 'text-gray-600' : 'text-gray-500'}`}>© 2026 Academicians</p>
+          </div>
+        </div>
+      </footer>
 
       {/* LOGIN MODAL */}
       {showLoginModal && (
