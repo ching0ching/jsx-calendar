@@ -604,22 +604,13 @@ export default function DigitalEventCalendar() {
       {/* FOOTER */}
       <footer className={`mt-6 pt-6 border-t ${isDark ? 'border-gray-700 text-gray-400' : 'border-gray-200 text-gray-600'}`}>
         <div className="max-w-5xl mx-auto px-2 sm:px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-            <div>
-              <h3 className="font-semibold text-green-700 mb-2">Academicians</h3>
-              <p className="text-sm">Your trusted partner in quality education</p>
-            </div>
-            <div className="sm:text-right">
-              <p className="text-sm font-medium">Connect With Us</p>
-              <div className="flex flex-col sm:flex-col-reverse gap-2 mt-2">
-                <a href="https://www.facebook.com/AcademiciansOfficial/reviews" target="_blank" rel="noopener noreferrer" className="text-xs text-green-600 hover:text-green-700 underline">
-                  📘 School Facebook
-                </a>
-                <a href="https://www.facebook.com/kent.dayo.5" target="_blank" rel="noopener noreferrer" className="text-xs text-green-600 hover:text-green-700 underline">
-                  👤 Admin Contact
-                </a>
-              </div>
-            </div>
+          <div className="flex flex-wrap gap-4 mb-4 justify-center">
+            <a href="https://www.facebook.com/AcademiciansOfficial/reviews" target="_blank" rel="noopener noreferrer" className="text-xs text-green-600 hover:text-green-700 underline">
+              📘 School Facebook
+            </a>
+            <a href="https://www.facebook.com/kent.dayo.5" target="_blank" rel="noopener noreferrer" className="text-xs text-green-600 hover:text-green-700 underline">
+              👤 Admin Contact
+            </a>
           </div>
           <div className={`pt-4 border-t ${isDark ? 'border-gray-700' : 'border-gray-200'} text-center text-xs`}>
             <p className="mb-2">#TheSchoolOfChoice</p>
