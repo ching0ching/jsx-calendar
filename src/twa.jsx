@@ -430,9 +430,9 @@ export default function DigitalEventCalendar() {
           <div style={{ width: 50, height: 50, minWidth: 50, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
             <img src="/twa-logo.jpg" alt="School Logo" style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', boxShadow: '0 2px 4px rgba(0,0,0,0.3)' }} onError={(e) => { e.target.style.display = 'none'; }} />
           </div>
-          <div className="min-w-0 overflow-hidden">
-            <h1 className="text-lg sm:text-2xl font-bold leading-snug" style={{ color: '#f7d774', textShadow: '0 1px 0 rgba(0,0,0,0.15)' }}>Event Calendar</h1>
-            <p className="text-xs sm:text-sm leading-tight" style={{ color: '#ffeeba' }}>Tayabas Western Academy</p>
+          <div className="min-w-0">
+            <h1 className="text-lg sm:text-2xl font-bold leading-snug whitespace-nowrap" style={{ color: '#f7d774', textShadow: '0 1px 0 rgba(0,0,0,0.15)' }}>Event Calendar</h1>
+            <p className="text-xs sm:text-sm leading-tight whitespace-nowrap" style={{ color: '#ffeeba' }}>Tayabas Western Academy</p>
           </div>
         </div>
 
