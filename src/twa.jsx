@@ -608,7 +608,7 @@ export default function DigitalEventCalendar() {
             <p className="mb-2">#TheSchoolOfChoice</p>
             <p className={isDark ? 'text-gray-500' : 'text-gray-400'}>For event inquiries, contact the school directly via Facebook</p>
             <p className={`mt-2 ${isDark ? 'text-gray-600' : 'text-gray-500'}`}>© 2025-2026 Academicians</p>
-            <p className={`text-[10px] mt-1 ${isDark ? 'text-gray-600' : 'text-gray-500'}`}>app by Group 6 ICT Babbage</p>
+            <p className={`text-[10px] mt-1 ${isDark ? 'text-gray-700' : 'text-gray-400'} opacity-60`}>by Group 6 ICT Babbage</p>
           </div>
         </div>
       </footer>
