@@ -425,26 +425,26 @@ export default function DigitalEventCalendar() {
   return (
     <div className={`min-h-screen p-2 sm:p-4 ${isDark ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-800'}`}>
       {/* HEADER */}
-      <header className={`max-w-5xl mx-auto mb-4 sm:mb-6 p-2 sm:p-4 rounded-lg sm:rounded-xl shadow-lg border ${isDark ? 'border-gray-700' : 'border-gray-200'} flex items-center justify-between flex-wrap`} style={{ backgroundColor: COLORS.green.dark }}>
-        <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
-          <div style={{ width: 48, height: 48, minWidth: 48, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+      <header className={`max-w-5xl mx-auto mb-4 sm:mb-6 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg border ${isDark ? 'border-gray-700' : 'border-gray-200'} flex items-center justify-between gap-4`} style={{ backgroundColor: COLORS.green.dark }}>
+        <div className="flex items-center gap-3 sm:gap-4">
+          <div style={{ width: 52, height: 52, minWidth: 52, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
             <img src="/twa-logo.jpg" alt="School Logo" style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', boxShadow: '0 2px 4px rgba(0,0,0,0.3)' }} onError={(e) => { e.target.style.display = 'none'; }} />
           </div>
-          <div className="min-w-0">
-            <h1 className="text-base sm:text-2xl font-bold leading-tight" style={{ color: '#f7d774', textShadow: '0 1px 0 rgba(0,0,0,0.15)' }}>Digital Event Calendar</h1>
-            <p className="text-xs sm:text-sm leading-tight" style={{ color: '#ffeeba' }}>Tayabas Western Academy</p>
+          <div>
+            <h1 className="text-xl sm:text-3xl font-bold leading-none" style={{ color: '#f7d774', textShadow: '0 1px 0 rgba(0,0,0,0.15)' }}>Digital Event Calendar</h1>
+            <p className="text-sm sm:text-base leading-tight mt-0.5" style={{ color: '#ffeeba' }}>Tayabas Western Academy</p>
             <p className="text-xs leading-tight" style={{ color: '#ffeeba', fontStyle: 'italic', letterSpacing: '0.5px' }}>LAUS DEO</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-1 sm:gap-2 mt-2 sm:mt-0 w-full sm:w-auto flex-wrap justify-end">
-          <button className={`px-2 sm:px-4 py-2 rounded min-h-[40px] sm:min-h-[44px] flex items-center justify-center ${isDark ? 'bg-gray-100 text-gray-900' : 'bg-yellow-300 text-gray-900'} text-xs sm:text-sm shadow-sm font-semibold`} onClick={() => setIsDark(!isDark)}>{isDark ? '☀️' : '🌙'} <span className="hidden sm:inline ml-1">{isDark ? 'Light' : 'Dark'}</span></button>
+        <div className="flex items-center gap-2 sm:gap-3 ml-auto flex-shrink-0">
+          <button className={`px-3 sm:px-4 py-2 rounded min-h-[40px] sm:min-h-[44px] flex items-center justify-center whitespace-nowrap ${isDark ? 'bg-gray-100 text-gray-900' : 'bg-yellow-300 text-gray-900'} text-xs sm:text-sm shadow-sm font-semibold`} onClick={() => setIsDark(!isDark)}>{isDark ? '☀️' : '🌙'} <span className="hidden sm:inline ml-1">{isDark ? 'Light' : 'Dark'}</span></button>
 
-          <button className={`px-2 sm:px-4 py-2 rounded min-h-[40px] sm:min-h-[44px] flex items-center justify-center ${isDark ? 'bg-gray-800 text-white' : 'bg-green-600 text-white'} text-xs sm:text-sm shadow-sm`} onClick={() => { if (isAdmin) setShowAdminModal(true); else setShowLoginModal(true); }}>{isAdmin ? '⚙️' : '🔐'} <span className="hidden sm:inline ml-1">{isAdmin ? 'Admin' : 'Login'}</span></button>
+          <button className={`px-3 sm:px-4 py-2 rounded min-h-[40px] sm:min-h-[44px] flex items-center justify-center whitespace-nowrap ${isDark ? 'bg-gray-800 text-white' : 'bg-green-600 text-white'} text-xs sm:text-sm shadow-sm`} onClick={() => { if (isAdmin) setShowAdminModal(true); else setShowLoginModal(true); }}>{isAdmin ? '⚙️' : '🔐'} <span className="hidden sm:inline ml-1">{isAdmin ? 'Admin' : 'Login'}</span></button>
 
-          {isAdmin && <button className="px-2 sm:px-4 py-2 rounded border text-xs sm:text-sm text-red-500 min-h-[40px] sm:min-h-[44px] flex items-center justify-center" onClick={() => setIsAdmin(false)}>✕ <span className="hidden sm:inline ml-1">Logout</span></button>}
+          {isAdmin && <button className="px-3 sm:px-4 py-2 rounded border text-xs sm:text-sm text-red-500 min-h-[40px] sm:min-h-[44px] flex items-center justify-center whitespace-nowrap" onClick={() => setIsAdmin(false)}>✕ <span className="hidden sm:inline ml-1">Logout</span></button>}
 
-          <button className="px-2 sm:px-4 py-2 rounded border text-lg sm:text-sm lg:hidden min-h-[40px] sm:min-h-[44px] flex items-center justify-center" onClick={() => setShowSidebar(s => !s)}>☰</button>
+          <button className="px-3 sm:px-4 py-2 rounded border text-lg sm:text-sm lg:hidden min-h-[40px] sm:min-h-[44px] flex items-center justify-center flex-shrink-0" onClick={() => setShowSidebar(s => !s)}>☰</button>
         </div>
       </header>
 
